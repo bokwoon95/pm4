@@ -28,7 +28,7 @@ CREATE TABLE pm_paginate (
     ,first JSONB -- '[["1", "2", "3", "4", "5"], []]'
 );
 
-the problem is that it requires the ids to be sequential. I need to generate a 
+the problem is that it requires the ids to be sequential. If ids are non sequential I will have to contain -all- the values for each page
 
 map /posts -> posts.html
 /posts?p=2 -> posts.html {"p":"2"}
