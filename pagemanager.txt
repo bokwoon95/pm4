@@ -14,4 +14,6 @@ web ui is still possible; when used in single user mode it is enabled by default
 
 pointing a URL at a resource needs some thinking. By right I want the user to be able to point a URL at a theme template, or a HTML file directly (becomes almost like apache in that sense).
 
-Using go-git, I can ask the user to simply input the github URL and pagemanager can clone the theme's repo directly into the datafolder. git credentials are stored in localStorage via javascript, so no backend necessary to persist the creds.
+Using go-git, I can ask the user to simply input the github URL and pagemanager can clone the theme's repo directly into the datafolder. 
+
+Using go-git, I can also generate the html artifacts and push the results to github (and hence github pages). github credentials are stored in localStorage via javascript, so no backend necessary to persist the creds.
