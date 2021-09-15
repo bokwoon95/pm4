@@ -17,3 +17,5 @@ pointing a URL at a resource needs some thinking. By right I want the user to be
 Using go-git, I can ask the user to simply input the github URL and pagemanager can clone the theme's repo directly into the datafolder. 
 
 Using go-git, I can also generate the html artifacts and push the results to github (and hence github pages). github credentials are stored in localStorage via javascript, so no backend necessary to persist the creds.
+
+pagemanager should be -the- fastest way to stand a website up for a complete beginner. You can write simple HTML files and serve them immediately. You can experiment with HTML, CSS and JS. You can write your own themes and use the json schema files for basic data entry with the database.
