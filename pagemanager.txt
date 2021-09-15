@@ -24,8 +24,8 @@ CREATE TABLE pm_paginate (
     table_name TEXT -- 'posts'
     ,order_by TEXT -- 'created_at'
     ,limit INT -- 10
-    ,criteria JSONB -- {"name":"posts","order_by":"created_at",limit:10}
-    ,first JSONB -- '[["1", "2", "3", "4", "5"], []]'
+    ,page INT -- 2
+    ,ids JSONB -- '["1", "2", "3", "4", "5",]'
 );
 
 the problem is that it requires the ids to be sequential. If ids are non sequential I will have to contain -all- the values for each page
@@ -33,6 +33,6 @@ the problem is that it requires the ids to be sequential. If ids are non sequent
 map /posts -> posts.html
 /posts?p=2 -> posts.html {"p":"2"}
 
-SELECT * FROM posts WHERE id = 11
-UNION ALL
-SELECT * FROM posts WHERE created_at >= SELECT * FROM posts WHERE
+SELECT * FROM posts WHERE post_id IN jsonb_array_elements_text(SELECT ids FROM pm_paginate WHERE table_name = ? AND limit = ? page = ?)
+
+there is a problem where themes written for single-user will not work for multi-user because it doesn't take into account user_id. how do we want to tackle this? do i ask all theme authors to include a user_id predicate?
