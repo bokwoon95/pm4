@@ -9,3 +9,5 @@ a page consists of templates and json data. json data is sourced from the page-s
 in order to automatically generate a CRUD form for data group json as well as page json, the theme author will have to specify a json schema for each blob. Each json schema blob should contain enough information to meaningfully generate a form from it automatically.
 
 no doubt, sometimes pages will have to run arbitrary SQL queries (only SELECTs) in order to generate the page data. this takes the form of goja scripts.
+
+web ui is still possible; when used in single user mode it is enabled by default. No login wall at all. Straight to the URL dashboard.
