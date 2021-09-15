@@ -13,3 +13,5 @@ no doubt, sometimes pages will have to run arbitrary SQL queries (only SELECTs) 
 web ui is still possible; when used in single user mode it is enabled by default. No login wall at all. Straight to the URL dashboard.
 
 pointing a URL at a resource needs some thinking. By right I want the user to be able to point a URL at a theme template, or a HTML file directly (becomes almost like apache in that sense).
+
+Using go-git, I can ask the user to simply input the github URL and pagemanager can clone the theme's repo directly into the datafolder.
