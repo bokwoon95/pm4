@@ -22,6 +22,17 @@ pagemanager should be -the- fastest way to stand a website up for a complete beg
 
 CREATE TABLE pm_paginate (
     table_name TEXT -- 'posts'
-    ,entries_per_page INT -- 10
-    ,page_ids JSONB -- '[1,11,21,31,41]'
+    ,order_by TEXT -- 'created_at'
+    ,limit INT -- 10
+    ,criteria JSONB -- {"name":"posts","order_by":"created_at",limit:10}
+    ,first JSONB -- '[["1", "2", "3", "4", "5"], []]'
 );
+
+the problem is that it requires the ids to be sequential. I need to generate a 
+
+map /posts -> posts.html
+/posts?p=2 -> posts.html {"p":"2"}
+
+SELECT * FROM posts WHERE id = 11
+UNION ALL
+SELECT * FROM posts WHERE created_at >= SELECT * FROM posts WHERE
