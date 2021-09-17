@@ -1,0 +1,7 @@
+templates = [ "header.html", "footer.html" ]
+
+[content-security-policy]
+script-src = [ "stackpath.bootstrapcdn.com", "code.jquery.com" ]
+style-src = [ "stackpath.bootstrapcdn.com", "fonts.googleapis.com" ]
+img-src = [ "source.unsplash.com", "images.unsplash.com" ]
+font-src = [ "fonts.gstatic.com" ]

@@ -1,0 +1,7 @@
+.banner {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url({{ .TemplateRoot }}/banner.jpg);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url({{ asset . "banner.jpg" }});
+  /* {{ asset . "banner.jpg" }} -- .TemplateRoot(/pm-templates/plainsimple) .AssetsRoot(/pm-assets) */
+  /* /pm-assets/pm-templates/plainsimple/banner.jpg? */
+  /* /pm-templates/plainsimple/banner.jpg? */
+}

@@ -1,10 +1,8 @@
-simple
+(input) file.html -> file.config.toml, etc -> output
 
-theme pics are all namespaced by the theme, ensuring that a theme filename is always unique within a website. we basically check that there are no conflicting themes on application startup, so the namespaces are guaranteed to be unique
+/pm-templates is served at /pm-templates
 
-all user-uploaded images are stored in the same place, and the namespaced filename guarantees that there will no no naming conflicts. But the theme folders themselves also come with default images as fallback in the filename they are looking for is not present inside the user uploads folder.
-
-a page consists of templates and json data. json data is sourced from the page-specific json as well as the <data groups> (think of a better name)
+/pm-assets is served at /pm-assets
 
 in order to automatically generate a CRUD form for data group json as well as page json, the theme author will have to specify a json schema for each blob. Each json schema blob should contain enough information to meaningfully generate a form from it automatically.
 
@@ -20,19 +18,17 @@ Using go-git, I can also generate the html artifacts and push the results to git
 
 pagemanager should be -the- fastest way to stand a website up for a complete beginner. You can write simple HTML files and serve them immediately. You can experiment with HTML, CSS and JS. You can write your own themes and use the json schema files for basic data entry with the database.
 
-CREATE TABLE pm_paginate (
-    table_name TEXT -- 'posts'
+CREATE TABLE pm_paginate_posts (
     ,order_by TEXT -- 'created_at'
     ,limit INT -- 10
-    ,page INT -- 2
-    ,ids JSONB -- '["1", "2", "3", "4", "5",]'
+    ,page_number INT -- 2
+    ,page_ids JSONB -- '["1", "2", "3", "4", "5"]'
 );
-
-the problem is that it requires the ids to be sequential. If ids are non sequential I will have to contain -all- the values for each page
 
 map /posts -> posts.html
 /posts?p=2 -> posts.html {"p":"2"}
 
-SELECT * FROM posts WHERE post_id IN jsonb_array_elements_text(SELECT ids FROM pm_paginate WHERE table_name = ? AND limit = ? page = ?)
+SELECT * FROM posts WHERE post_id = ANY(jsonb_array_elements_text(SELECT ids FROM pm_paginate WHERE table_name = ? AND limit = ? page = ?))
 
 there is a problem where themes written for single-user will not work for multi-user because it doesn't take into account user_id. how do we want to tackle this? do i ask all theme authors to include a user_id predicate?
+    by right the theme contents should be static and should not change between users
