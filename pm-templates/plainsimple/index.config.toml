@@ -1,5 +1,10 @@
 templates = [ "header.html", "footer.html" ]
 
+data = [ "data/site.json" ]
+
+# do I want to enable data sharing across themes or not?
+globaldata = [ "navbar.json" ]
+
 [content-security-policy]
 script-src = [ "stackpath.bootstrapcdn.com", "code.jquery.com" ]
 style-src = [ "stackpath.bootstrapcdn.com", "fonts.googleapis.com" ]
