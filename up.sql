@@ -7,10 +7,9 @@ CREATE TABLE IF NOT EXISTS pm_page (
     ,plugin_id TEXT
     ,redirect_url TEXT
 
-    ,CONSTRAINT pm_page_url_pkey PRIMARY KEY (site_id, url)
+    ,CONSTRAINT pm_page_site_id_url_pkey PRIMARY KEY (site_id, url)
+    ,CONSTRAINT pm_page_site_id_alias_key UNIQUE (site_id, alias)
 );
-
-CREATE UNIQUE INDEX IF NOT EXISTS pm_page_alias_idx ON pm_page (site_id, alias);
 
 CREATE TABLE IF NOT EXISTS pm_data (
     site_id TEXT
