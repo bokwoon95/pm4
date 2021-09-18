@@ -1,5 +1,29 @@
 (input) file.html -> file.config.toml, etc -> output
 
+PageManager
+
+MultisitePageManager
+
+PageReader needs:
+- GetPage(ctx, url) (page, err)
+- TemplateDir (readonly) -> templates_files, data_files, content_security_policy
+- GetData(ctx, url, dataIDs...) (data, err)
+
+PageManager core:
+
+type TemplateFS struct { fsys fs.FS }
+
+func (tmplfs TemplateFS) GetTemplate(templateFile string) (tmpl *template.Template, data map[string]interface{}, err error)
+
+package templatefs
+
+type TemplateFS struct
+
+type TemplateConfig struct
+
+PageWriter needs:
+- GetPages(ctx)
+
 /pm-templates is served at /pm-templates
 
 /pm-assets is served at /pm-assets
