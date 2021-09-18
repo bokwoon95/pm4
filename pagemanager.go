@@ -51,11 +51,15 @@ func GetTemplate(fsys fs.FS, name string) (tmpl *htemplate.Template, dataFiles [
 
 // Pagemanager { templateFS TemplateFS; dialect string; db *sql.DB }
 
+// any kind of smart caching should be done on the Pagemanager level. It can even activate caching depending on site load (avg is after median)
+
 // MultisitePagemanager
 
 // the reason Pagemanager is sticking to SQL is because template *.data.js files potentially need to run SQL queries. If people want to use a 'scalable' datastore like DynamoDB they can write their own pagemanager implementation that uses TemplateFS
 
-// ServeAssets(w, r)
+// ServeStats(http.Handler) http.Handler
+
+// ServeAssets(http.Handler) http.Handler
 
 // PageCMS(http.Handler) http.Handler
 
