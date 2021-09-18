@@ -1,1 +1,1 @@
-DROP TABLE IF EXISTS pm_page, pm_data_group;
+DROP TABLE IF EXISTS pm_page, pm_template_data;

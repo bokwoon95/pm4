@@ -8,7 +8,7 @@
 </head>
 <body>
   {{ template "header.html" }}
-  <header class="banner">
+  <header class="banner" data-schema="{{ .TemplatePath }}/index.json">
   </header>
   <p>hello world</p>
   {{ template "footer.html" }}
