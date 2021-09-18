@@ -14,8 +14,8 @@ CREATE UNIQUE INDEX IF NOT EXISTS pm_page_alias_idx ON pm_page (site_id, alias);
 
 CREATE TABLE IF NOT EXISTS pm_data (
     site_id TEXT
-    ,data_file TEXT
+    ,data_id TEXT
     ,data JSONB
 
-    ,CONSTRAINT pm_data_site_id_data_file_pkey PRIMARY KEY (site_id, data_file)
+    ,CONSTRAINT pm_data_site_id_data_file_pkey PRIMARY KEY (site_id, data_id)
 );

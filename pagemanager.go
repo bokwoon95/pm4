@@ -38,8 +38,9 @@ type Router interface {
 	Route(*http.Request) (Page, error)
 }
 
-type TemplateDataStore interface {
-	GetData(ctx context.Context, siteID sql.NullString, dataPaths ...string) (data map[string]interface{}, err error)
+type DataStore interface {
+	SetData(ctx context.Context, siteID sql.NullString, dataID string, data []byte) error
+	GetData(ctx context.Context, siteID sql.NullString, dataIDs ...string) (data []byte, err error)
 }
 
 func New() (Pagemanager, error) {
