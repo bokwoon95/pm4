@@ -8,6 +8,7 @@ import (
 	"errors"
 	"flag"
 	"fmt"
+	htemplate "html/template"
 	"io/fs"
 	"net/http"
 	"os"
@@ -30,19 +31,40 @@ type Secrets struct {
 }
 
 type TemplateConfig struct {
-	TemplateFiles []string
-	DataFiles []string
+	TemplateFiles         []string            `toml:"template_files"`
+	DataFiles             []string            `toml:"data_files"`
+	ContentSecurityPolicy map[string][]string `toml:"content_security_policy"`
 }
 
-type TemplateFS struct {
+func GetTemplate(fsys fs.FS, name string) (tmpl *htemplate.Template, dataFiles []string, data map[string]interface{}, err error) {
+	// oh no. But {{ resolve }} templatefunc needs to be able to check the assetsdir for the corresponding asset when serving the css/js file
+	return nil, nil, nil, nil
 }
+
+// TemplateFS { templates, assets fs.FS }
+
+// Open(name string) (fs.File, error)
+
+// GetTemplate(name string) (tmpl *template.Template, dataFiles []string, data map[string]interface{}, err error)
+
+// oh no, but the user may need the list of templates files to figure out whether there is a corresponding *.data.js file -- better for GetTemplate to just return an entire struct object that contains the config (plus it can be easily cached)
+
+// Pagemanager { templateFS TemplateFS; dialect string; db *sql.DB }
+
+// MultisitePagemanager
+
+// the reason Pagemanager is sticking to SQL is because template *.data.js files potentially need to run SQL queries. If people want to use a 'scalable' datastore like DynamoDB they can write their own pagemanager implementation that uses TemplateFS
+
+// ServeAssets(w, r)
+
+// PageCMS(http.Handler) http.Handler
+
+// ServePages(http.Handler) http.Handler
 
 type Pagemanager struct {
 	datadir     fs.FS
 	templatedir fs.FS
 	assetsdir   fs.FS
-	pageStore   PageStore
-	dataStore   DataStore
 	plugins     map[string]http.Handler
 }
 
