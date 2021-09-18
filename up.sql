@@ -1,18 +1,21 @@
 CREATE TABLE IF NOT EXISTS pm_page (
-    url TEXT
-    ,site_id TEXT
+    site_id TEXT
+    ,url TEXT
+    ,alias TEXT
     ,page_type TEXT NOT NULL
     ,template_file TEXT
     ,plugin_id TEXT
     ,redirect_url TEXT
 
-    ,CONSTRAINT pm_page_url_pkey PRIMARY KEY (url, site_id)
+    ,CONSTRAINT pm_page_url_pkey PRIMARY KEY (site_id, url)
 );
 
-CREATE TABLE IF NOT EXISTS pm_template_data (
-    data_file TEXT
-    ,site_id TEXT
+CREATE UNIQUE INDEX IF NOT EXISTS pm_page_alias_idx ON pm_page (site_id, alias);
+
+CREATE TABLE IF NOT EXISTS pm_data (
+    site_id TEXT
+    ,data_file TEXT
     ,data JSONB
 
-    ,CONSTRAINT pm_template_data_data_path_site_id_pkey PRIMARY KEY (data_path, site_id)
+    ,CONSTRAINT pm_data_site_id_data_file_pkey PRIMARY KEY (site_id, data_file)
 );

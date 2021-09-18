@@ -1,4 +1,4 @@
-DELETE FROM pm_data_group;
+DELETE FROM pm_template_data;
 
 DELETE FROM pm_page;
 

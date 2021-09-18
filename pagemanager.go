@@ -22,18 +22,17 @@ type Pagemanager struct {
 	assetsdir   fs.FS
 }
 
+var plugins map[string]http.Handler
+
 type Page struct {
+	SiteID       sql.NullString
 	URL          string
-	SiteID       string
+	Alias        sql.NullString
 	PageType     string
-	TemplatePath string
+	TemplateFile string
 	PluginID     string
 	RedirectURL  string
 }
-
-var plugins map[string]http.Handler
-
-// Route(*http.Request) (template, plugin string, err error)
 
 type Router interface {
 	Route(*http.Request) (Page, error)
