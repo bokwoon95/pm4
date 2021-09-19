@@ -37,10 +37,13 @@ func NewTemplateFS(fsys, assets fs.FS) *TemplateFS {
 }
 
 func (tmplfs *TemplateFS) asset(data map[string]any, filename string) (string, error) {
+	// TODO: themeDir is assumed to be on unix system, must make it work for
+	// windows system as well (filepath.Join will produce backslash delimited
+	// paths, which we do not want to use in the URL)
 	themeDir, _ := data["ThemeDir"].(string)
 	path := filepath.Join(themeDir, filename)
 	if tmplfs.assets != nil {
-		_, err := fs.Stat(tmplfs.assets, strings.TrimLeft(themeDir, "/"))
+		_, err := fs.Stat(tmplfs.assets, strings.TrimLeft(path, "/"))
 		if err != nil && !errors.Is(err, fs.ErrNotExist) {
 			return "", fmt.Errorf("stat-ing %s in assets: %w", strings.TrimLeft(themeDir, "/"), err)
 		} else if err == nil {
