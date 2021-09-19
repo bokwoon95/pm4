@@ -50,11 +50,6 @@ func (tmplfs *TemplateFS) asset(data map[string]any, filename string) (string, e
 	return path, nil
 }
 
-func stripExt(filename string) string {
-	ext := filepath.Ext(filename)
-	return filename[:len(filename)-len(ext)]
-}
-
 func (tmplfs *TemplateFS) parseTemplates(themeDir, filename string, filenames ...string) (*template.Template, error) {
 	b, err := fs.ReadFile(tmplfs.fsys, filename)
 	if err != nil {
@@ -80,7 +75,7 @@ func (tmplfs *TemplateFS) parseTemplates(themeDir, filename string, filenames ..
 	return tmpl, nil
 }
 
-func (tmplfs *TemplateFS) GetThemeDir(filename string) string {
+func (tmplfs *TemplateFS) getThemeDir(filename string) string {
 	path := filename
 	for path != filepath.Dir(path) {
 		path = filepath.Dir(path)
@@ -99,7 +94,7 @@ func (tmplfs *TemplateFS) GetTemplateBundle(filename string) (TemplateBundle, er
 	if err != nil {
 		return tmplBundle, fmt.Errorf("stat-ing %s: %w", filename, err)
 	}
-	tmplBundle.ThemeDir = tmplfs.GetThemeDir(filename)
+	tmplBundle.ThemeDir = tmplfs.getThemeDir(filename)
 	ext := filepath.Ext(filename)
 	configFilename := filename[:len(filename)-len(ext)] + ".config.toml"
 	b, err := fs.ReadFile(tmplfs.fsys, configFilename)
