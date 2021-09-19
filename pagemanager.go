@@ -30,6 +30,14 @@ type Secrets struct {
 	S3SecretKey string
 }
 
+func NewSecrets(secretsFile string, secretsEnv bool) (Secrets, error) {
+	var secrets Secrets
+	if secretsFile != "" {
+	} else if secretsEnv {
+	}
+	return secrets, nil
+}
+
 type TemplateConfig struct {
 	TemplateFiles         []string            `toml:"template_files"`
 	DataFiles             []string            `toml:"data_files"`
@@ -89,7 +97,7 @@ type DataStore interface {
 // PageWriter needs: PageSetter, DataSetter
 
 func New() (Pagemanager, error) {
-	if !flag.Parsed() {
+	if !flag.Parsed() { // the presence of this makes New susecptible to race conditions, it is no longer goroutine safe. what if I make the user pass in a parseFlags boolean argument? Then the user invokes it like this New(!flag.Parsed())
 		flag.Parse()
 	}
 	var err error
