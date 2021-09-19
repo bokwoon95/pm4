@@ -12,4 +12,4 @@ font-src = [ "fonts.gstatic.com" ]
 Posts = "queries/posts.sql"
 
 [data_functions]
-Posts = "github.com/bokwoon95/pagemanager.GetPosts"
+Posts = "github.com/bokwoon95/pagemanager.GetPosts -fields=abc,def,ghi"
