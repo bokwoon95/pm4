@@ -100,7 +100,8 @@ func (tmplfs *TemplateFS) GetTemplateBundle(filename string) (TemplateBundle, er
 		return tmplBundle, fmt.Errorf("stat-ing %s: %w", filename, err)
 	}
 	tmplBundle.ThemeDir = tmplfs.GetThemeDir(filename)
-	configFilename := stripExt(filename) + ".config.toml"
+	ext := filepath.Ext(filename)
+	configFilename := filename[:len(filename)-len(ext)] + ".config.toml"
 	b, err := fs.ReadFile(tmplfs.fsys, configFilename)
 	if errors.Is(err, fs.ErrNotExist) {
 		tmplBundle.Template, err = tmplfs.parseTemplates(tmplBundle.ThemeDir, filename)
