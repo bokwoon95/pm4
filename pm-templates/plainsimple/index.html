@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="{{ .TemplateRoot }}/index.css">
+  <link rel="stylesheet" href="{{ .ThemeDir }}/index.css">
   <title>hello world</title>
 </head>
 <body>
   {{ template "header.html" }}
-  <header class="banner" data-schema="{{ .TemplatePath }}/index.json">
+  <header class="banner" data-schema="{{ .ThemeDir }}/index.json">
   </header>
-  <p>hello world</p>
+  <p>hello world {{ asset . "banner.jpg" }}</p>
   {{ template "footer.html" }}
-  <script src="{{ .TemplateRoot }}/index.js"></script>
+  <script src="{{ .ThemeDir }}/index.js"></script>
 </body>
 </html>
