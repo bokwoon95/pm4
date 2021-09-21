@@ -12,12 +12,11 @@ CREATE TABLE IF NOT EXIST pm_site (
     ,CONSTRAINT pm_site_domain_subdomain_key UNIQUE (domain, subdomain)
 );
 
-CREATE TABLE IF NOT EXISTS pm_page (
+CREATE TABLE IF NOT EXISTS pm_route (
     site_id UUID
     ,url_path TEXT
-    ,template_file TEXT
-    ,plugin TEXT
-    ,redirect_url TEXT
+    ,plugin TEXT -- pm-templates | pm-redirect
+    ,params JSONB
 
     ,CONSTRAINT pm_site_id_url_path_pkey PRIMARY KEY (site_id, url_path)
 );

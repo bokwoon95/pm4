@@ -49,7 +49,7 @@ func (tmplfs *TemplateFS) asset(data map[string]any, filename string) (string, e
 		if err != nil && !errors.Is(err, fs.ErrNotExist) {
 			return "", fmt.Errorf("stat-ing %s in assets: %w", strings.TrimLeft(themeDir, "/"), err)
 		} else if err == nil {
-			return filepath.Join("/pm-assets", path), nil
+			return filepath.Join("/pm-media", path), nil
 		}
 	}
 	return path, nil
