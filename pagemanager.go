@@ -18,6 +18,8 @@ type TemplateConfig struct {
 	ThemeDir              string              `toml:"-"`
 	TemplateFiles         []string            `toml:"template_files"`
 	DataFiles             []string            `toml:"data_files"`
+	DataQueries           map[string]string   `toml:"data_queries"`
+	DataFunctions         map[string]string   `toml:"data_functions"`
 	ContentSecurityPolicy map[string][]string `toml:"content_security_policy"`
 }
 

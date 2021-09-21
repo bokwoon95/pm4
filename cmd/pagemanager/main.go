@@ -17,6 +17,8 @@ func main() {
 	}
 	fmt.Printf(".TemplateFiles: %v\n", tmplBundle.TemplateFiles)
 	fmt.Printf(".DataFiles: %v\n", tmplBundle.DataFiles)
+	fmt.Printf(".DataQueries: %v\n", tmplBundle.DataQueries)
+	fmt.Printf(".DataFunctions: %v\n", tmplBundle.DataFunctions)
 	fmt.Printf(".Data: %v\n", tmplBundle.Data)
 	err = tmplBundle.Template.Execute(os.Stdout, tmplBundle.Data)
 	if err != nil {
